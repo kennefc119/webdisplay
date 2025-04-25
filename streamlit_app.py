@@ -35,18 +35,17 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 st.markdown(f"""
 <div style='text-align:center;'>
-    <h3></span></h3>
 </div>
 """, unsafe_allow_html=True)
 
 
 st.markdown("""
-<div style='text-align:center; font-size:18px; line-height:1.8; color:#aaa;'>
-🛒 想以優惠價即刻入手？<br>
-👉 撳 <b>「Buy」</b> 就即刻進入付款頁面，我哋職員會盡快聯絡你跟進！<br><br>
-💬 有問題想問？撳 <b>「Ask」</b> 即刻直入 WhatsApp 同我哋對話！<br><br>
-⏰ <b style='color:#000;'>優惠價會喺倒數完結後即時失效</b>，唔好等啦！<br>
-<b>名額有限，手快有手慢冇！</b>
+<div style='text-align:center'>
+撳「Buy」 就即刻進入付款頁面，我哋職員會盡快聯絡你跟進！
+有問題想問？撳「Ask」 即刻直入 WhatsApp 同我哋對話！
+
+優惠價會喺倒數完結後即時失效，唔好等啦！
+名額有限，手快有手慢冇！
 </div>
 """, unsafe_allow_html=True)
 
