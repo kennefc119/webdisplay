@@ -26,7 +26,32 @@ base_image_url = "https://kandz.streamlit.app/images/"
 ###################################################################################################
 
 valid_offers = df[df['expiry_date'].apply(lambda x: datetime.strptime(str(x), "%Y%m%d")) > now]
-st.markdown(f"### 🎁 今日 Secret Promotion Offer 數量：<span style='color:red; font-weight:bold;'>{len(valid_offers)}</span>", unsafe_allow_html=True)
+st.markdown("<div style='height:300px;'></div>", unsafe_allow_html=True)
+
+st.markdown(f"""
+<div style='text-align:center;'>
+    <h3>🎁 今日 Secret Promotion Offer 數量：<span style='color:red; font-weight:bold;'>{len(valid_offers)}</span></h3>
+</div>
+""", unsafe_allow_html=True)
+st.markdown(f"""
+<div style='text-align:center;'>
+    <h3></span></h3>
+</div>
+""", unsafe_allow_html=True)
+
+
+st.markdown("""
+<div style='text-align:center; font-size:18px; line-height:1.8; color:#aaa;'>
+🛒 想以優惠價即刻入手？<br>
+👉 撳 <b>「Buy」</b> 就即刻進入付款頁面，我哋職員會盡快聯絡你跟進！<br><br>
+💬 有問題想問？撳 <b>「Ask」</b> 即刻直入 WhatsApp 同我哋對話！<br><br>
+⏰ <b style='color:#000;'>優惠價會喺倒數完結後即時失效</b>，唔好等啦！<br>
+<b>名額有限，手快有手慢冇！</b>
+</div>
+""", unsafe_allow_html=True)
+
+
+st.markdown("<div style='height:300px;'></div>", unsafe_allow_html=True)
 cols = st.columns(3)
 
 ###################################################################################################
@@ -51,8 +76,20 @@ for idx, row in df.iterrows():
             st.image(image_path, use_container_width=True)
             st.markdown(f"**{row['name']}**")
             st.caption(row['description'])
-            st.markdown(f"⏳ Promotion expires in<br><b>{days} D {hours} Hr {minutes} min {seconds} sec</b>", unsafe_allow_html=True)
+            
+            time_parts = []
+            if days > 0:
+                time_parts.append(f"{days} D")
+            if hours > 0:
+                time_parts.append(f"{hours} Hr")
+            if hours == 0:
+                time_parts.append(f"<span style='color:red;'>{minutes} min {seconds} sec</span>")
+            else:
+                time_parts.append(f"{minutes} min {seconds} sec")
 
+            time_display = " ".join(time_parts)
+            st.markdown(f"⏳ Promotion expires in<br><b>{time_display}</b>", unsafe_allow_html=True)
+            
             message = f"你好，我想查詢 {row['name']} 幾錢?"
             whatsapp_url = f"https://wa.me/447418333672?text={message}"
             ask_button = f"<a href='{whatsapp_url}' target='_blank' style='display:inline-block; margin-right:10px;'><button style='background-color:#e0e0e0;color:black;padding:8px 16px;border:none;border-radius:5px;font-size:16px;'>Ask</button></a>"
