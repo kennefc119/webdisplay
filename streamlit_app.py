@@ -37,7 +37,9 @@ for idx, row in df.iterrows():
         with col:
             image_filename = str(row['image_filename'])
             image_path = Path("images") / (image_filename + ".jpeg")
-            payment_url = row['payment_url']
+            pay_url = row['payment_url']
+            if not pay_url.startswith("http"):
+                pay_url = "https://" + pay_url
             st.image(image_path, use_container_width=True)
             st.markdown(f"**{row['name']}**")
             st.caption(row['description'])
@@ -46,5 +48,9 @@ for idx, row in df.iterrows():
             message = f"你好，我想查詢 {row['name']} 幾錢?"
             whatsapp_url = f"https://wa.me/447418333672?text={message}"
             ask_button = f"<a href='{whatsapp_url}' target='_blank' style='display:inline-block; margin-right:10px;'><button style='background-color:#e0e0e0;color:black;padding:8px 16px;border:none;border-radius:5px;font-size:16px;'>Ask</button></a>"
-            pay_button = f"<a href='{row['payment_url']}' target='_blank' style='display:inline-block;'><button style='background-color:#FFA500;color:white;padding:8px 16px;border:none;border-radius:5px;font-size:16px;'>Pay</button></a>"
+            pay_button = f"""<a href="{pay_url}" target="_blank" rel="noopener noreferrer" style="display:inline-block;">
+                <button style="background-color:#FFA500;color:white;padding:8px 16px;border:none;border-radius:5px;font-size:16px;cursor:pointer;">
+                    Pay
+                </button>
+            </a>"""            
             st.markdown(ask_button + pay_button, unsafe_allow_html=True)
